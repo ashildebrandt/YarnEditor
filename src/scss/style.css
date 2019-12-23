@@ -17,7 +17,6 @@ body {
   left: 0px;
   bottom: 0px;
   right: 0px;
-  background: -webkit-linear-gradient(45deg, #ddc9b9 0%, #daf0f2 100%);
   transform-style: preserve-3d;
   z-index: -1000;
 }
@@ -121,21 +120,29 @@ a:hover {
   content: 'Version ';
 }
 
-.icon {
-  border-radius: 4px;
-  width: 32px;
-  height: 32px;
-  background: #eee url('../public/images/icons.png') no-repeat;
-  background-blend-mode: difference;
-  overflow: hidden;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: opacity 0.25s, background 0.25s;
+.icons {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	opacity: 0;
+	transition: opacity 0.25s;
 }
+
+.node:hover .icons {
+	opacity: 1;
+}
+
+.icon
+{
+	display: inline-block;
+	cursor: pointer;
+	opacity: 0.5;
+	transition: opacity 0.25s;
+}
+
 
 .icon:hover {
   opacity: 1;
-  background-color: #fff;
 }
 
 /* --- MENU --- */
