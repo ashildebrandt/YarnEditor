@@ -3,16 +3,50 @@
 	<head>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="manifest" href="./manifest.json" >
-
 		<title>Yarn</title>
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="8gmp2fm55zkop6h"></script>
 	</head>
 	<body id="theme-light">
+
 		<!-- Fancy Background -->
 		<div id="app-bg">&nbsp;</div>
 
 		<!-- Entry Point / Container -->
 		<div id="app">
+
+			<header>
+				<img src="./public/images/yarn.png" />
+				<div class="menu">
+					<button data-bind="click: app.ui.menu.file">File?</button>
+					<ul class="dropdown" id="menu-file">
+						<li id="menu-open">Open...</li>
+						<li id="menu-append">Append...</li>
+						<hr/>
+						<li id="menu-save">Save</li>
+						<li id="menu-save-json"">Save As Json...</li>
+						<li id="menu-save-yarn">Save As Yarn...</li>
+						<li id="menu-save-twee">Save As Twee...</li>
+						<li id="menu-save-twee2">Save As Twee2...</li>
+						<li id="menu-save-xml">Save As Xml...</li>
+						<hr/>
+						<li id="menu-exit">Exit</li>
+					</ul>
+				</div>
+				<!-- <div class="menu">
+					<button>File</button>
+				</div> -->
+				<div id="title">Yarn</div>
+				<div id="frame-controls">
+					<button id="minimize">
+						<svg x="0px" y="0px" viewBox="0 0 10.2 1"><rect x="0" y="50%" width="10.2" height="1" /></svg>
+					</button>
+					<button id="maximize">
+						<svg viewBox="0 0 10 10"><path d="M0,0v10h10V0H0z M9,9H1V1h8V9z" /></svg>
+					</button>
+					<button id="close">
+						<svg viewBox="0 0 10 10"><polygon points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1" /></svg>
+					</button>
+			</header>
 
 			<!-- search form -->
 			<div class="app-search">

@@ -7,6 +7,7 @@ import {
 import { Node } from './node';
 import { data } from './data';
 import { Utils, FILETYPE } from './utils';
+import { ui } from './ui';
 
 export var App = function(name, version) {
   var self = this;
@@ -14,6 +15,7 @@ export var App = function(name, version) {
   // self
   this.instance = this;
   this.data = data;
+  this.ui = ui;
   this.name = ko.observable(name);
   this.version = ko.observable(version);
   this.editing = ko.observable(null);
@@ -167,7 +169,7 @@ export var App = function(name, version) {
         if (e.button == 1) {
           midClickHeld = true;
         }
-        $('#marquee').css({ x: 0, y: 0, width: 0, height: 0 });
+        $('#marquee').css({ display: 'block', x: 0, y: 0, width: 0, height: 0 });
         dragging = true;
         offset.x = e.pageX;
         offset.y = e.pageY;
@@ -198,7 +200,7 @@ export var App = function(name, version) {
             if (MarqueeOn) {
               MarqueeSelection = [];
               MarqRect = { x1: 0, y1: 0, x2: 0, y2: 0 };
-              $('#marquee').css({ x: 0, y: 0, width: 0, height: 0 });
+              $('#marquee').css({ display: 'block', x: 0, y: 0, width: 0, height: 0 });
             } else {
               var nodes = self.nodes();
               for (var i in nodes) {
@@ -294,7 +296,7 @@ export var App = function(name, version) {
 
         MarqueeSelection = [];
         MarqRect = { x1: 0, y1: 0, x2: 0, y2: 0 };
-        $('#marquee').css({ x: 0, y: 0, width: 0, height: 0 });
+        $('#marquee').css({display: 'none', x: 0, y: 0, width: 0, height: 0 });
         MarqueeOn = false;
       });
     })();

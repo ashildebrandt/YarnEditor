@@ -755,7 +755,7 @@ a:hover {
 
 #marquee {
   z-index: 10000;
-  display: block;
+  display: none;
   position: absolute;
   pointer-events: none;
   border: 1px solid #49eff1;
@@ -891,3 +891,97 @@ a:hover {
   bottom: 30px;
   position: absolute;
 }
+
+/* --- FRAME --- */
+
+header {
+	z-index: 10000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #444;
+	-webkit-app-region: drag;
+	-webkit-user-select: none;
+	display: flex;
+	font-size: 0.8rem;
+}
+
+	header img {
+		width: 16px;
+		height: 16px;
+		padding-right: 10px;
+		padding-left: 10px;
+		padding-top: 8px;
+	}
+
+	header .menu {
+		-webkit-app-region: no-drag;
+	}
+
+		header .menu button {
+			color: #ccc;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			border: none;
+			background: transparent;
+			padding: 8px;
+		}
+
+			header .menu button:hover {
+				background: #666;
+			}
+
+			header .menu button.selected {
+				background: #666;
+			}
+
+		header .menu ul.dropdown {
+			position: absolute;
+			display: none;
+			color: #ccc;
+			background: #111;
+			margin: 0;
+			padding: 8px 8px 3px 8px;
+			list-style-type: none;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+		}
+
+			header .menu ul.dropdown li {
+				margin: 0 40px 5px 20px;
+			}
+
+			header .menu ul.dropdown hr {
+				background-color: #666;
+				border: 0;
+				height: 1px;
+			}
+
+	header #title {
+		flex-grow: 1;
+		text-align: center;
+		color: #ccc;
+		margin-top: 4px;
+	}
+
+	header #frame-controls {
+		-webkit-app-region: no-drag;
+	}
+
+		header #frame-controls button {
+			margin: 0;
+			width: 48px;
+			height: 32px;
+			border: 0;
+			outline: 0;
+			background: transparent;
+			fill: #fff;
+		}
+
+			header #frame-controls button svg {
+				width: 10px;
+				height: 10px;
+			}
+
+			header #frame-controls button#close:hover {
+				background: rgba(183, 28, 28, 1);
+			}

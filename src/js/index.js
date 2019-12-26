@@ -24,6 +24,8 @@ import "spectrum-colorpicker";
 import "lightweight-emoji-picker/dist/picker.js";
 import spoken from "spoken";
 
+import "./classes/ui.js";
+
 import { App } from "./classes/app.js";
 
 window.app = new App("Yarn", "0.4.1");
