@@ -4,10 +4,10 @@ Added:
 * Background image support
 
 
-
 * Finish theming ACE
 * Move / theme search
-* New Node button
 * Open search
 * Serif writing option
 * Theme arrange bar
+* Fix iPad compatibility
+* Add filename to title
