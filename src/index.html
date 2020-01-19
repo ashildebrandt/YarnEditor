@@ -36,8 +36,8 @@
 						<li class="disabled" id="menu-load-dropbox" data-bind="click: function() { app.data.tryLoadDropbox();}">Load from Dropbox...</li>
 						<li class="disabled" id="menu-save-dropbox" data-bind="click: function() { app.data.trySaveDropbox();}">Save to Dropbox...</li>
 						<hr/>
-						<li id="menu-lightmode">Light mode</li>
-						<li id="menu-darkmode">Dark mode</li>
+						<li id="menu-lightmode" data-bind="hidden: app.config.darkMode">Light mode</li>
+						<li id="menu-darkmode" data-bind="visible: app.config.darkMode">Dark mode</li>
 						<hr/>
 						<li id="menu-exit">Exit</li>
 					</ul>
@@ -59,12 +59,24 @@
 				<div class="menu">
 					<button id="view">View</button>
 					<ul class="dropdown" id="menu-view">
+						<li id="menu-view-randombackground">
+							<span class="check" data-bind="visible: app.config.randomBackground"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
+							Random background image
+						</li>
+						<li id="menu-view-blur" data-bind="visible: app.config.randomBackground">
+							<span class="check" data-bind="visible: app.config.blurBackground"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
+							Blur background
+						</li>
+						<li id="menu-view-refresh" data-bind="visible: app.config.randomBackground">
+							Refresh background image
+						</li>
+						<hr/>
 						<li id="menu-view-grid">
 							<span class="check"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
 							Show grid
 						</li>
 						<li id="menu-view-snap">
-							<span class="check"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
+							<span class="check" data-bind="visible: app.config.snap" ><i class="ms-Icon ms-Icon--CheckMark"></i></span>
 							Snap to grid
 						</li>
 					</ul>

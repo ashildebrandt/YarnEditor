@@ -14,10 +14,10 @@ body {
 
 #app-bg {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
+  top: -20px;
+  left: -20px;
+  bottom: -20px;
+  right: -20px;
   transform-style: preserve-3d;
   z-index: -1000;
 }
@@ -424,6 +424,7 @@ a:hover {
   border-top: 1px solid #fff;
   cursor: pointer;
   transition: border 0.25s;
+  -webkit-font-smoothing: antialiased; /* Prevents font from becoming blurred when zooming */
 }
 
 .node:hover {
@@ -795,8 +796,6 @@ span.styled-checkbox + span.styled-checkbox {
   display: none;
   position: absolute;
   pointer-events: none;
-  border: 1px solid #49eff1;
-  background-color: rgba(29, 94, 95, 0.2);
 }
 
 /* --- MEDIA --- */
@@ -882,12 +881,6 @@ span.styled-checkbox + span.styled-checkbox {
   .app-undo-redo span {
     display: inline;
   }
-  /* .ace_gutter {
-    left: -10px !important;
-  }
-  .ace_scroller {
-    left: 30px !important;
-  } */
 }
 
 .tooltip {

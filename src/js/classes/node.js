@@ -289,7 +289,7 @@ export var Node = function() {
         var movedY = newY - self.y();
 
         moved = true;
-        if(app.snap) {
+        if(app.config.snap()) {
           self.x((Math.ceil(newX / 50) * 50) + app.snapOffset[0]);
           self.y((Math.ceil(newY / 50) * 50) + app.snapOffset[1]);
         } else {
@@ -308,7 +308,7 @@ export var Node = function() {
 
           if (nodes.length > 0) {
             for (var i in nodes) {
-              if(app.snap) {
+              if(app.config.snap()) {
                 nodes[i].x((Math.ceil((nodes[i].x() + movedX) / 50) * 50) + app.snapOffset[0]);
                 nodes[i].y((Math.ceil((nodes[i].y() + movedY) / 50) * 50) + app.snapOffset[0]);
               } else {

@@ -47,7 +47,6 @@ export var App = function(name, version) {
   this.selectedLanguageIndex = 6;
   this.language = null;
   this.hasTouchScreen = false;
-  this.snap = true;
   this.snapOffset = [0, 0];
   // this.fs = fs;
 
@@ -56,7 +55,10 @@ export var App = function(name, version) {
   // this.parser = new ini.Parser();
   this.configFilePath = null;
   this.config = {
-    darkModeEnabled: false,
+    randomBackground: ko.observable(false),
+    blurBackground: ko.observable(false),
+    darkTheme: ko.observable(true),
+    snap: ko.observable(true),
     spellcheckEnabled: true,
     transcribeEnabled: false,
     showCounter: false,
@@ -323,6 +325,7 @@ export var App = function(name, version) {
 
       if (self.cachedScale + scaleChange > self.zoomLimitMax) {
         self.cachedScale = self.zoomLimitMax;
+        // TODO: Fix blur
       } else if (self.cachedScale + scaleChange < self.zoomLimitMin) {
         self.cachedScale = self.zoomLimitMin;
       } else {
