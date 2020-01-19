@@ -249,7 +249,7 @@ a:hover {
   font-size: 1.5rem;
   line-height: 3rem;
   text-align: center;
-  z-index: 1000;
+  z-index: 100;
   box-sizing: border-box;
 }
 
@@ -765,6 +765,10 @@ span.styled-checkbox + span.styled-checkbox {
   width: 100%;
   height: 100%;
   z-index: 200;
+}
+
+.modal p {
+  margin-top: 0;
 }
 
 .modal .form {
