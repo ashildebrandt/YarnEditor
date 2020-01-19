@@ -210,9 +210,10 @@ export var App = function(name, version) {
               }
               app.snapOffset[0] += (pageX - offset.x);
               app.snapOffset[1] += (pageY - offset.y);
+              app.snapOffset[0] = app.snapOffset[0]%50;
+              app.snapOffset[1] = app.snapOffset[1]%50;
               offset.x = pageX;
               offset.y = pageY;
-              console.log(app.snapOffset);
             }
           } else {
             MarqueeOn = true;

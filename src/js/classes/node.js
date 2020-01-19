@@ -292,8 +292,8 @@ export var Node = function() {
 
         moved = true;
         if(app.snap) {
-          self.x((Math.ceil(newX / 50) * 50) + app.snapOffset[0]%50);
-          self.y((Math.ceil(newY / 50) * 50) + app.snapOffset[1]%50);
+          self.x((Math.ceil(newX / 50) * 50) + app.snapOffset[0]);
+          self.y((Math.ceil(newY / 50) * 50) + app.snapOffset[1]);
         } else {
           self.x(newX);
           self.y(newY);
@@ -310,8 +310,13 @@ export var Node = function() {
 
           if (nodes.length > 0) {
             for (var i in nodes) {
-              nodes[i].x(nodes[i].x() + movedX);
-              nodes[i].y(nodes[i].y() + movedY);
+              if(app.snap) {
+                nodes[i].x((Math.ceil((nodes[i].x() + movedX) / 50) * 50) + app.snapOffset[0]);
+                nodes[i].y((Math.ceil((nodes[i].y() + movedY) / 50) * 50) + app.snapOffset[0]);
+              } else {
+                nodes[i].x(nodes[i].x() + movedX);
+                nodes[i].y(nodes[i].y() + movedY);
+              }
             }
           }
         }
