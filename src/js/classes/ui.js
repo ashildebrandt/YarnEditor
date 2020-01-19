@@ -49,6 +49,18 @@ $('#menu-lightmode').click(function() {
     $('#menu-darkmode').show();
 });
 
+$('#menu-view-snap').click(function() {
+    if(app.snap) {
+        console.log("Turning off snapping");
+        app.snap = false;
+        $('#menu-view-snap .check').hide();
+    } else {
+        console.log("Turning on snapping");
+        app.snap = true;
+        $('#menu-view-snap .check').show();
+    }
+});
+
 $(document).click(function() {
     if(menuOpen && !clickingMenu) {
         CloseOpenMenus();
