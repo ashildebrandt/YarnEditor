@@ -166,7 +166,6 @@ export var App = function(name, version) {
           midClickHeld = true;
           $('.nodes').css("cursor", "move");
         }
-        $('#marquee').css({ display: 'block', x: 0, y: 0, width: 0, height: 0 });
         dragging = true;
         offset.x = e.pageX;
         offset.y = e.pageY;
@@ -243,6 +242,7 @@ export var App = function(name, version) {
             }
 
             $('#marquee').css({
+              display: 'block',
               x: MarqRect.x1,
               y: MarqRect.y1,
               width: Math.abs(MarqRect.x1 - MarqRect.x2),
