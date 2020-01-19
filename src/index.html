@@ -5,7 +5,6 @@
 		<link rel="manifest" href="./manifest.json" >
 		<title>Yarn</title>
 		<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="8gmp2fm55zkop6h"></script>
-		<link rel="stylesheet" href="./scss/fabric.min.css" />
 	</head>
 	<body id="theme-dark" class="ms-Fabric">
 
@@ -84,9 +83,6 @@
 						<li id="menu-github">View Documentation On GitHub</li>
 					</ul>
 				</div>
-				<!-- <div class="menu">
-					<button>File</button>
-				</div> -->
 				<div id="title" data-bind="text:app.name"></div>
 				<div id="frame-controls">
 					<button id="minimize">
@@ -101,52 +97,64 @@
 			</header>
 
 			<div id="main">
-
-				<!-- search form -->
-				<div class="app-search">
+				<div id="hover-controls">
+					<div id="add-node" class="hover-group">
+						<label>Add</label>
+						<span class="button" data-bind="click:app.newNode" title="Add new node">
+							<i class="ms-Icon ms-Icon--Add"></i>
+						</span>
+					</div>
+					<div id="app-sort" class="hover-group hide-when-narrow">
+						<label>Arrange</label>
+						<span class="button" data-bind="click: app.arrangeX" title="Horizontal">
+							<i class="ms-Icon ms-Icon--Sort rotate"></i>
+						</span>
+						<span class="button" data-bind="click: app.arrangeY" title="Vertical">
+							<i class="ms-Icon ms-Icon--Sort"></i>
+						</span>
+						<span class="button" data-bind="click: app.arrangeSpiral" title="Spiral">
+							<i class="ms-Icon ms-Icon--Refresh"></i>
+						</span>
+						<span class="button" data-bind="click: app.sortAlphabetical" title="Alphabetical grid">
+							<i class="ms-Icon ms-Icon--GridViewSmall"></i>
+						</span>
+					</div>
+					<div id="app-undo-redo" class="hover-group -show-when-narrow">
+						<label>Undo / redo</label>
+						<span class="button" data-bind="click: function() { app.historyDirection('undo'); }" title="Undo">
+							<i class="ms-Icon ms-Icon--Undo"></i>
+						</span>
+						<span class="button" data-bind="click: function() { app.historyDirection('redo'); }" title="Redo">
+							<i class="ms-Icon ms-Icon--Redo"></i>
+						</span>
+					</div>
+					<!--
+					<div class="app-zoom">
+						<span data-bind="click: function() { app.zoom(4); }" title="Zoom 1:1"></span>
+						<span data-bind="click: function() { app.zoom(3); }" title="Zoom 2:1"></span>
+						<span data-bind="click: function() { app.zoom(2); }" title="Zoom 3:1"></span>
+						<span data-bind="click: function() { app.zoom(1); }" title="Zoom 4:1"></span>
+					</div>
+					-->
+				</div>
+				<div id="search-controls">
 					<input id="nodeSearchInput" type="text" class="search-field" placeholder="Search"/>
-					
-					<span>
-							<span class="search-title styled-checkbox">
-									<input type="checkbox" checked="checked" id="search-title" />
-									<label for="search-title">Title</label>
-							</span>
-							<span class="search-body styled-checkbox">
-									<input type="checkbox" id="search-body" />
-									<label for="search-body">Body</label>
-							</span>
-							<span class="search-tags styled-checkbox">
-									<input type="checkbox" id="search-tags" />
-									<label for="search-tags">Tags</label>
-							</span>
+					<span class="search-title styled-checkbox">
+						<input type="checkbox" checked="checked" id="search-title" />
+						<label for="search-title" title="Search titles"><i class="ms-Icon ms-Icon--FontColorA"></i></label>
+					</span>
+					<span class="search-body styled-checkbox">
+						<input type="checkbox" id="search-body" />
+						<label for="search-body" title="Search bodies"><i class="ms-Icon ms-Icon--AlignLeft"></i></label>
+					</span>
+					<span class="search-tags styled-checkbox">
+						<input type="checkbox" id="search-tags" />
+						<label for="search-tags" title="search tags"><i class="ms-Icon ms-Icon--Tag"></i></label>
 					</span>
 				</div>
 
-				<!-- zoom controls -->
-				<div class="app-sort hide-when-narrow">
-					<span data-bind="click: app.arrangeX" title="Arrange H"></span>
-					<span data-bind="click: app.arrangeY" title="Arrange V"></span>
-					<span data-bind="click: app.arrangeSpiral" title="Arrange Spiral"></span>
-					<span data-bind="click: app.sortAlphabetical" title="Sort Alphabetically" ></span>
-				</div>
-
-				<div class="app-undo-redo">
-					<span data-bind="click: function() { app.historyDirection('undo'); }"></span>
-					<span data-bind="click: function() { app.historyDirection('redo'); }"></span>
-				</div>
-
-				<div class="app-zoom">
-					<span data-bind="click: function() { app.zoom(4); }" title="Zoom 1:1"></span>
-					<span data-bind="click: function() { app.zoom(3); }" title="Zoom 2:1"></span>
-					<span data-bind="click: function() { app.zoom(2); }" title="Zoom 3:1"></span>
-					<span data-bind="click: function() { app.zoom(1); }" title="Zoom 4:1"></span>
-				</div>
-
-				<div id="add-node" data-bind="click:app.newNode">
-					<i class="ms-Icon ms-Icon--Add"></i>
-				</div>
-
 				<!-- navigation / menu -->
+				<!--
 				<div class="app-menu">
 					<div class="menu">
 						<span class="title" onmouseover="app.openNodeListMenu('open')">Open</span>
@@ -156,6 +164,7 @@
 						</div>
 					</div>
 				</div>
+				-->
 
 				<!-- arrow bg canvas for linked nodes -->
 				<canvas class="arrows"></canvas>
@@ -430,7 +439,8 @@
 				<!-- ko if:app.about() != null -->
 				<div class="modal" data-bind="click: function() { app.about(null); }">
 					<div class="form" data-bind="preventBubble: 'click'">
-					<div>
+						<div>
+							<h1>Yarn</h1>
 							<p>Dialogue editor created for "Night in the Woods" (and other projects) by @NoelFB, @blurymind and @infinite_ammo with contributions from @seiyria, @beeglebug, and @ashildebrandt.</p>
 							<p>It is heavily inspired by and based on the amazing Twine software: http://twinery.org/</p>
 							<p>Background images supplied by Unsplash.</p>
@@ -443,11 +453,6 @@
 				</div>
 				<!-- /ko -->
 				
-				<!-- app info -->
-				<div class="app-info">
-					<span class="app-version" data-bind="text:app.version"></span>
-				</div>
-
 				<!-- marquee -->
 				<div id="marquee"></div>
 			</div>
@@ -456,7 +461,7 @@
 		<!-- Hidden fields, file dialogs, and elements -->
 		<div class="hidden">
 			<input type="file" id="open-image" accept=".jpg,.jpeg,.png,.gif,.bmp"/>
-			<input type="file" id="open-file" accept=".txt,.xml,.json,.twee,.tw2"/>
+			<input type="file" id="open-file" accept=".yarn,.txt,.xml,.json,.twee,.tw2"/>
 			<input type="file" id="open-folder" webkitdirectory directory/>
 			<input type="file" id="save-file" nwsaveas="filename.txt" />
 		</div>

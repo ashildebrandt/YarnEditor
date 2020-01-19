@@ -173,15 +173,28 @@
         background-color: rgba(113, 169, 214, 0.2);
     }
 
-    #add-node {
+    .hover-group span.button {
         background: #222;
         color: #fff;
         border: 1px solid #222;
     }
 
-        #add-node:hover {
+        .hover-group span.button:hover {
             border: 1px solid rgb(113, 169, 214);
             cursor: pointer;
+        }
+
+        .hover-group label {
+            color: #999;
+        }
+
+    #search-controls {
+        background: #444;
+    }
+
+        #search-controls input[type=text] {
+            background: #222;
+            color: #fff;
         }
 
 }

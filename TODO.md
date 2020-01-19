@@ -3,11 +3,9 @@ Added:
 * Snap to grid
 * Background image support
 
-
 * Finish theming ACE
 * Move / theme search
 * Open search
 * Serif writing option
-* Theme arrange bar
 * Fix iPad compatibility
 * Add filename to title

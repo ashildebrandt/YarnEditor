@@ -16,6 +16,7 @@ let yarnVersion = "0.4.1";
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    frame: false,
     width: 1200,
     height: 800,
     minWidth: 800,

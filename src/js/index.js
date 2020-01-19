@@ -28,5 +28,5 @@ import "./classes/ui.js";
 
 import { App } from "./classes/app.js";
 
-window.app = new App("Yarn Editor", "0.1");
+window.app = new App("Yarn", "0.1");
 window.app.run();

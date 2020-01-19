@@ -123,9 +123,11 @@ export var App = function(name, version) {
     // set default zoom level for mobile users
     if (osName === 'mobile') self.zoom(3);
 
+    /*
     if (self.isElectron) {
       document.getElementById('dropboxIO').style.display = 'none';
     }
+    */
 
     // prevent click bubbling
     ko.bindingHandlers.preventBubble = {
