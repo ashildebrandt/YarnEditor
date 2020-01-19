@@ -11,18 +11,19 @@ export var Node = function() {
   var self = this;
   this.titleColorValues = [
     '#eee',
-    '#6EA5E0',
-    '#9EDE74',
-    '#FFE374',
-    '#F7A666',
-    '#C47862',
-    '#97E1E9'
+    '#F48FB1',
+    '#B39DDB',
+    '#90CAF9',
+    '#80DEEA',
+    '#A5D6A7',
+    '#FFF59D'
   ];
   // primary values
   this.index = ko.observable(globalNodeIndex++);
   this.title = ko.observable('Node' + this.index());
   this.tags = ko.observable('');
   this.body = ko.observable('Empty Text');
+  this.titleColorClass = ko.observable("col1");
   //this.x = ko.observable(128);
   //this.y = ko.observable(128);
   this.active = ko.observable(true);
@@ -186,8 +187,8 @@ export var Node = function() {
   this.setSelected = function(select) {
     self.selected = select;
 
-    if (self.selected) $(self.element).css({ border: '1px solid #49eff1' });
-    else $(self.element).css({ border: 'none' });
+    if (self.selected) $(self.element).addClass('selected');
+    else $(self.element).removeClass('selected');
   };
 
   this.toggleSelected = function() {
@@ -238,13 +239,17 @@ export var Node = function() {
   };
 
   this.doCycleColorDown = function() {
+    $(self.element).removeClass("col"+self.colorID());
     self.colorID(self.colorID() - 1);
     if (self.colorID() < 0) self.colorID(6);
+    $(self.element).addClass("col"+self.colorID());
   };
 
   this.doCycleColorUp = function() {
+    $(self.element).removeClass("col"+self.colorID());
     self.colorID(self.colorID() + 1);
     if (self.colorID() > 6) self.colorID(0);
+    $(self.element).addClass("col"+self.colorID());
   };
 
   this.remove = function() {
@@ -281,12 +286,19 @@ export var Node = function() {
 
         var newX = pageX / self.getScale() - offset[0];
         var newY = pageY / self.getScale() - offset[1];
+
         var movedX = newX - self.x();
         var movedY = newY - self.y();
 
         moved = true;
-        self.x(newX);
-        self.y(newY);
+        var snap = true;
+        if(snap) {
+          self.x(Math.ceil(newX / 50) * 50);
+          self.y(Math.ceil(newY / 50) * 50);
+        } else {
+          self.x(newX);
+          self.y(newY);
+        }
 
         if (groupDragging) {
           var nodes = [];

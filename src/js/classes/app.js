@@ -54,12 +54,12 @@ export var App = function(name, version) {
   // this.parser = new ini.Parser();
   this.configFilePath = null;
   this.config = {
-    nightModeEnabled: false,
+    darkModeEnabled: false,
     spellcheckEnabled: true,
     transcribeEnabled: false,
     showCounter: false,
     autocompleteWordsEnabled: true,
-    autocompleteEnabled: true,
+    autocompleteTagsEnabled: true,
     overwrites: {
       makeNewNodesFromLinks: true,
     },
@@ -118,13 +118,7 @@ export var App = function(name, version) {
     // set default zoom level for mobile users
     if (osName === 'mobile') self.zoom(3);
 
-    if (!self.isElectron) {
-      // Add dropbox chooser
-      Utils.createDropboxChooser(
-        document.getElementById('dropbox-container'),
-        file => data.tryLoadFromDropbox(file)
-      );
-    } else {
+    if (self.isElectron) {
       document.getElementById('dropboxIO').style.display = 'none';
     }
 
@@ -168,6 +162,7 @@ export var App = function(name, version) {
       $('.nodes').on('pointerdown', function(e) {
         if (e.button == 1) {
           midClickHeld = true;
+          $('.nodes').css("cursor", "move");
         }
         $('#marquee').css({ display: 'block', x: 0, y: 0, width: 0, height: 0 });
         dragging = true;
@@ -287,6 +282,7 @@ export var App = function(name, version) {
         // console.log("finished dragging");
         if (e.button == 1) {
           midClickHeld = false;
+          $('.nodes').css("cursor", "default");
         }
         dragging = false;
 
@@ -670,7 +666,6 @@ export var App = function(name, version) {
           console.log(transcript);
           if (self.editing()) {
             self.insertTextAtCursor(transcript + '. ');
-            document.getElementById('speakTextBtnBubble').title = 'Transcribe';
           } else {
             if (transcript === 'open') {
               console.log('try open...');
@@ -704,29 +699,6 @@ export var App = function(name, version) {
       spoken.delay(500).then(() => {
         if (spoken.recognition.continuous) self.startCapture();
       });
-    };
-
-    this.toglTranscribing = function() {
-      const available = spoken.listen.available();
-      var transcribeButton = document.getElementById('toglTranscribing');
-      var speakBubble = document.getElementById('speakTextBtnBubble');
-      self.config.transcribeEnabled = transcribeButton.checked;
-      if (transcribeButton.checked && available) {
-        spoken.listen.on.partial(ts => {
-          if (self.editing()) {
-            speakBubble.style.visibility = 'visible';
-            speakBubble.title = `🗣️ ${ts} 🦜`;
-          } else {
-            self.$searchField.val(`🗣️ ${ts} 🦜`);
-          }
-        });
-        self.startCapture();
-      } else {
-        speakBubble.style.visibility = 'hidden';
-        transcribeButton.checked = false;
-        spoken.recognition.continuous = false;
-        spoken.listen.stop();
-      }
     };
 
     this.hearText = function() {
@@ -1100,24 +1072,18 @@ export var App = function(name, version) {
       self.editor = ace.edit('editor');
       self.editor.navigateFileEnd();
 
-      var autoCompleteButton = document.getElementById('toglAutocomplete');
-      autoCompleteButton.checked = self.config.autocompleteEnabled;
-      var autoCompleteWordsButton = document.getElementById(
-        'toglAutocompleteWords'
-      );
-      autoCompleteWordsButton.checked = self.config.autocompleteWordsEnabled;
-      var spellCheckButton = document.getElementById('toglSpellCheck');
-      spellCheckButton.checked = self.config.spellcheckEnabled;
-      var transcribeButton = document.getElementById('toglTranscribing');
-      transcribeButton.checked = self.config.transcribeEnabled;
-      self.toglTranscribing();
-      var nightModeButton = document.getElementById('toglNightMode');
-      nightModeButton.checked = self.config.nightModeEnabled;
-      self.toggleNightMode();
+      self.toggleWordCompletion(self.config.autocompleteWordsEnabled);
+      self.toggleTagCompletion(self.config.autocompleteTagsEnabled);
+
+      // var spellCheckButton = document.getElementById('toglSpellCheck');
+      // spellCheckButton.checked = self.config.spellcheckEnabled;
+      // var transcribeButton = document.getElementById('toglTranscribing');
+      // transcribeButton.checked = self.config.transcribeEnabled;
+      self.toggleTranscribing();
       var showCounterButton = document.getElementById('toglShowCounter');
-      showCounterButton.checked = self.config.showCounter;
+      // showCounterButton.checked = self.config.showCounter;
       self.toggleShowCounter();
-      self.toggleWordCompletion();
+      self.toggleSpellCheck();
 
       //// warn if titlealready exists
       self.validateTitle();
@@ -1170,8 +1136,7 @@ export var App = function(name, version) {
       // close tag autocompletion
       self.editor.getSession().on('change', function(evt) {
         if (evt.action === 'insert') {
-          var autoCompleteButton = document.getElementById('toglAutocomplete');
-          if (autoCompleteButton.checked) {
+          if (self.config.autoCompleteButton) {
             setTimeout(() => {
               switch (self.getTagBeforeCursor()) {
                 case '[[':
@@ -1234,7 +1199,6 @@ export var App = function(name, version) {
         self.updateCountry();
       }
 
-      self.toggleSpellCheck();
       self.updateEditorStats();
     }
   };
@@ -1317,35 +1281,26 @@ export var App = function(name, version) {
     }
   };
 
-  this.toggleSpellCheck = function() {
-    var spellCheckButton = document.getElementById('toglSpellCheck');
-    self.config.spellcheckEnabled = spellCheckButton.checked;
-    if (spellCheckButton.checked) {
+  this.toggleSpellCheck = function(forceState = null) {
+    if(forceState != null) {
+      self.config.spellcheckEnabled = forceState;
+    } else {
+      self.config.spellcheckEnabled = !self.config.spellcheckEnabled;
+    }
+    if(self.config.spellcheckEnabled) {
+      $("#button-toggleSpellCheck").removeClass("active").addClass("active");
+      console.log("Spellcheck enabled");
       enable_spellcheck();
     } else {
+      $("#button-toggleSpellCheck").removeClass("active");
+      console.log("Spellcheck disabled");
       disable_spellcheck();
     }
   };
 
-  this.toggleNightMode = function() {
-    var nightModeButton = document.getElementById('toglNightMode');
-    self.config.nightModeEnabled = nightModeButton.checked;
-    var cssOverwrite = {};
-    if (self.config.nightModeEnabled) {
-      cssOverwrite = { filter: 'invert(100%)' };
-    } else {
-      cssOverwrite = { filter: 'invert(0%)' };
-    }
-    $('#app').css(cssOverwrite);
-    $('#app-bg').css(cssOverwrite);
-    $('.tooltip').css(cssOverwrite);
-    $('.node .body').css(cssOverwrite);
-    $('.node-editor .form .editor-container .editor-preview').css(cssOverwrite);
-  };
-
   this.toggleShowCounter = function() {
     var showCounterButton = document.getElementById('toglShowCounter');
-    self.config.showCounter = showCounterButton.checked;
+    // self.config.showCounter = showCounterButton.checked;
     if (self.config.showCounter) {
       $('.node-editor .form .bbcode-toolbar .editor-counter').css({
         display: 'initial',
@@ -1357,9 +1312,34 @@ export var App = function(name, version) {
     }
   };
 
-  this.toggleWordCompletion = function() {
-    var wordCompletionButton = document.getElementById('toglAutocompleteWords');
-    self.config.autocompleteWordsEnabled = wordCompletionButton.checked;
+  this.toggleTagCompletion = function(forceState = null) {
+    if(forceState != null) {
+      self.config.autocompleteTagsEnabled = forceState;
+    } else {
+      self.config.autocompleteTagsEnabled = !self.config.autocompleteTagsEnabled;
+    }
+    if(self.config.autocompleteTagsEnabled) {
+      $("#button-toggleTagCompletion").removeClass("active").addClass("active");
+      console.log("Tag completion enabled");
+    } else {
+      $("#button-toggleTagCompletion").removeClass("active");
+      console.log("Tag completion disabled");
+    }
+  }
+
+  this.toggleWordCompletion = function(forceState = null) {
+    if(forceState != null) {
+      self.config.autocompleteWordsEnabled = forceState;
+    } else {
+      self.config.autocompleteWordsEnabled = !self.config.autocompleteWordsEnabled;
+    }
+    if(self.config.autocompleteWordsEnabled) {
+      $("#button-toggleWordCompletion").removeClass("active").addClass("active");
+      console.log("Word completion enabled");
+    } else {
+      $("#button-toggleWordCompletion").removeClass("active");
+      console.log("Word completion disabled");
+    }
     self.editor.setOptions({
       enableBasicAutocompletion: self.config.autocompleteWordsEnabled,
       enableLiveAutocompletion: self.config.autocompleteWordsEnabled,
@@ -1391,6 +1371,39 @@ export var App = function(name, version) {
       if ($('#emojiPicker-container').is(':visible')) {
         $('#emojiPicker-container').hide();
       }
+    }
+  };
+
+  this.toggleTranscribing = function(forceState = null) {
+    if(spoken.listen.available()) {
+      if(forceState != null) {
+        self.config.transcribeEnabled = forceState;
+      } else {
+        self.config.transcribeEnabled = !self.config.transcribeEnabled;
+      }
+      if(self.config.transcribeEnabled) {
+        $("#button-toggleTranscribe").removeClass("active").addClass("active");
+        spoken.listen.on.partial(ts => {
+          if (self.editing()) {
+            speakBubble.style.visibility = 'visible';
+            speakBubble.title = `🗣️ ${ts} 🦜`;
+          } else {
+            self.$searchField.val(`🗣️ ${ts} 🦜`);
+          }
+        });
+        self.startCapture();
+        console.log("Transcription enabled");
+      } else {
+        $("#button-toggleTranscribe").removeClass("active");
+        spoken.recognition.continuous = false;
+        spoken.listen.stop();
+        console.log("Transcription disabled");
+      }
+    } else {
+      $("#button-toggleTranscribe").removeClass("active").removeClass("disabled").addClass("disabled");
+      $("#button-toggleTranscribe").attr("title", "Transcription not available");
+      self.config.transcribeEnabled = false;
+      console.log("Transcription not available");
     }
   };
 
@@ -1526,15 +1539,6 @@ export var App = function(name, version) {
       $('.node-editor .form').transition({ y: '-100' }, 250, function(e) {
         self.editing(null);
       });
-
-      var autoCompleteButton = document.getElementById('toglAutocomplete');
-      self.config.autocompleteEnabled = autoCompleteButton.checked;
-
-      var autoCompleteWordsButton = document.getElementById(
-        'toglAutocompleteWords'
-      );
-      self.config.autocompleteWordsEnabled = autoCompleteWordsButton.checked;
-
       setTimeout(self.updateSearch, 600);
     }
   };

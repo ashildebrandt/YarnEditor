@@ -1,5 +1,172 @@
 #theme-dark {
+
     #app-bg {
         background: -webkit-linear-gradient(45deg, #000 0%, #2c3546 100%);
-      }
+    }
+
+    header .menu ul.dropdown {
+        color: #ccc;
+        background: #222;
+    }
+
+        header .menu ul.dropdown li:hover {
+            background: #094771;
+            color: #fff;
+        }
+
+        header .menu ul.dropdown hr {
+            background-color: #666;
+        }
+
+    .node .title {
+        color: #fff;
+        background: #333;
+    }
+
+    .node.col0 .title { background: #333; }
+    .node.col1 .title { background: rgb(121, 61, 81); }
+    .node.col2 .title { background: rgb(77, 59, 110); }
+    .node.col3 .title { background: rgb(64, 104, 136); }
+    .node.col4 .title { background: rgb(61, 117, 124); }
+    .node.col5 .title { background: rgb(49, 100, 51); }
+    .node.col6 .title { background: rgb(104, 99, 51); }
+
+    .node .icons .icon {
+        color: rgba(255, 255, 255, 0.75) !important;
+    }
+
+    .node-delete {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .node-delete .form {
+        color: #ddd;
+        background: #000;
+    }
+
+    .node-editor {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+        .node-editor .form {
+            background: #333;
+        }
+
+            .node-editor .form .editor {
+                background: #111;
+                color: #ddd;
+            }
+        
+                .ace-yarn .ace_gutter {
+                background: #222;
+                color: #AAA;
+                }
+                .ace-yarn  {
+                background: #111;
+                color: #ddd;
+                }
+                .ace-yarn .ace_comment {
+                color: #44fe66;
+                font-style: italic;
+                }
+                .ace-yarn .ace_variable.ace_language  {
+                color: #0086B3;
+                }
+                .ace-yarn .ace_paren {
+                font-weight: bold;
+                }
+                .ace-yarn .ace_string.ace_llink {
+                color: #000;
+                }
+                .ace-yarn .ace_string.ace_rlink {
+                color: #3ecfe9;
+                }
+                .ace-yarn .ace_string.ace_comm {
+                color: #e93ecf;
+                }
+                .ace-yarn .ace_paren.ace_lcomm, .ace-yarn .ace_paren.ace_rcomm {
+                color: #e00ec0;
+                }
+                .ace-yarn .ace_paren.ace_llink, .ace-yarn .ace_paren.ace_rlink {
+                color: #0ec0e0;
+                }
+                .ace-yarn .ace_variable.ace_instance {
+                color: teal;
+                }
+                .ace-yarn .ace_constant.ace_language {
+                font-weight: bold;
+                }
+                .ace-yarn .ace_cursor {
+                color: white;
+                }
+                .ace-yarn .ace_marker-layer .ace_active-line {
+                /* background: rgb(255, 255, 204); */
+                border-top: 1px solid #444;
+                border-bottom: 1px solid #444;
+                }
+                .ace-yarn .ace_marker-layer .ace_selection {
+                background: rgb(181, 213, 255);
+                }
+                .ace-yarn.ace_multiselect .ace_selection.ace_start {
+                box-shadow: 0 0 3px 0px white;
+                border-radius: 2px;
+                }
+                .ace-yarn.ace_nobold .ace_line > span {
+                font-weight: normal !important;
+                }
+                .ace-yarn .ace_marker-layer .ace_step {
+                background: rgb(252, 255, 0);
+                }
+                .ace-yarn .ace_marker-layer .ace_stack {
+                background: rgb(164, 229, 101);
+                }
+                .ace-yarn .ace_marker-layer .ace_bracket {
+                margin: -1px 0 0 -1px;
+                border: 1px solid rgb(192, 192, 192);
+                }
+                .ace-yarn .ace_gutter-active-line {
+                background-color : rgba(0, 0, 0, 0.07);
+                }
+                .ace-yarn .ace_marker-layer .ace_selected-word {
+                background: rgb(250, 250, 255);
+                border: 1px solid rgb(200, 200, 250);
+                }
+                .ace-yarn .ace_print-margin {
+                width: 1px;
+                background: #e8e8e8;
+                }
+                .ace-yarn .ace_indent-guide {
+                background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+                }
+
+        .node-delete .buttons .delete {
+        background: #0078d4;
+        color: #fff;
+    }
+
+    .node {
+        background: rgba(10, 10, 10, 0.75);
+        backdrop-filter: blur(5px);
+        border: 1px solid #555;
+    }
+
+    .node .body {
+        color: #ccc;
+    }
+
+    .node.selected {
+        border: 1px solid #ddd;
+        box-shadow: 0px 2px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .node .tags {
+        border-top: 1px solid #333;
+        background: transparent;
+    }
+
+    .node .tags span {
+        background: #333;
+        color: #c4c4c4;
+    }
+
 }

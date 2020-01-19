@@ -9,6 +9,7 @@ body {
   -webkit-user-select: none;
   line-height: 1.6em;
   background: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #app-bg {
@@ -27,6 +28,14 @@ body {
   height: 100%;
   cursor: default;
   display: none;
+}
+
+#main {
+  position: absolute;
+  width: 100%;
+  top: 0rem;
+  bottom: 0;
+  box-sizing: border-box;
 }
 
 /* --- GLOBAL CSS --- */
@@ -92,6 +101,10 @@ a:hover {
 .templates,
 .hidden {
   display: none;
+}
+
+.disabled {
+  opacity: 0.5;
 }
 
 /* --- VARIOUS CSS --- */
@@ -197,16 +210,6 @@ a:hover {
   display: block;
   width: 100%;
   padding: 7px;
-}
-
-.dropbox-dropin-btn {
-  border: unset !important;
-  border-radius: unset !important;
-  border-bottom-color: unset !important;
-  height: 100% !important;
-  font-family: unset !important;
-  font-weight: unset !important;
-  line-height: 2 !important;
 }
 
 .app-menu .dropdown .item:hover {
@@ -414,9 +417,9 @@ a:hover {
   position: absolute;
   width: 200px;
   height: 200px;
-  background: #fff;
   border-radius: 2px;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
   border: 1px solid rgba(0, 0, 0, 0);
   border-top: 1px solid #fff;
   cursor: pointer;
@@ -431,10 +434,8 @@ a:hover {
   box-sizing: border-box;
   width: 100%;
   padding: 0px 10px 0px 10px;
-  height: 40px;
-  line-height: 40px;
-  background: #eee;
-  color: #666;
+  height: 35px;
+  line-height: 35px;
   font-size: 0.9em;
   font-weight: bold;
   transition: color 0.25s, background 0.25s;
@@ -444,14 +445,13 @@ a:hover {
 .node .body {
   position: absolute;
   box-sizing: border-box;
-  top: 40px;
+  top: 35px;
   width: 100%;
   height: calc(100% - 48px);
   padding: 8px 8px 8px 8px;
   font-size: 0.8em;
   overflow: hidden;
   font-family: yarnFont;
-  color: #666;
   line-height: 1.3em;
 }
 
@@ -475,8 +475,6 @@ a:hover {
   width: 100%;
   padding: 2px 4px 2px 4px;
   bottom: 0px;
-  border-top: 1px solid #ddd;
-  background: #f2f0eb;
   overflow: hidden;
 }
 
@@ -495,7 +493,7 @@ a:hover {
 .node .colorDown {
   position: absolute;
   right: 40px;
-  top: 4px;
+  top: 0px;
   opacity: 0;
   transition: opacity 0.125s;
 }
@@ -553,7 +551,6 @@ a:hover {
   width: 100%;
   height: 100%;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 .node-editor .form {
@@ -564,9 +561,8 @@ a:hover {
   width: 90%;
   height: 90%;
   padding: 20px 20px 40px 20px;
-  background: #fff;
   border-radius: 4px;
-  box-shadow: 0px 1px 1px #000;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -581,7 +577,6 @@ a:hover {
   box-sizing: border-box;
   width: 100%;
   font-size: 1.2em;
-  color: #666;
   padding: 10px 0px 10px 0px;
   margin-bottom: 5px;
   border: none;
@@ -593,55 +588,91 @@ a:hover {
   float: left;
   width: 100%;
   font-size: 0.8em;
+  margin: .25rem 0;
   overflow: auto;
+  display: flex;
+}
+
+.node-editor .form .bbcode-toolbar hr {
+  display: inline-block;
+  position: relative;
+  border: none;
+  width: 1px;
+  height: 1.5rem;
+  background: #ccc;
+  margin: 0 0.5rem;
+  top: 0.1rem;
 }
 
 .node-editor .form .bbcode-toolbar .bbcode-button {
   cursor: pointer;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0);
   text-align: center;
-  border-radius: 12px;
   background-color: white;
   color: black;
-  border: 2px solid #e7e7e7;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
   text-decoration: none;
   display: inline-block;
+  padding-top: 4px;
+  font-size: .9rem;
+  width: 2rem;
 }
 
 .node-editor .form .bbcode-toolbar .bbcode-button:hover {
-  background-color: #e7e7e7;
+  background: #e7e7e7;
+  border: 1px solid #ccc;
 }
 
 .node-editor .form .bbcode-toolbar .bbcode-button:active {
-  color: purple;
-  background-color: rgb(255, 255, 172);
+  background: #e7e7e7;
+}
+
+.node-editor .form .bbcode-toolbar .bbcode-button.active {
+  background: #e7e7e7;
+}
+
+.node-editor .form .bbcode-toolbar .bbcode-button.active:hover {
+  border: 1px solid #000;
+}
+
+.node-editor .form .bbcode-toolbar .bbcode-button.disabled {
+  opacity: 0.2;
+}
+
+.node-editor .form .bbcode-toolbar .bbcode-button.disabled:hover {
+  opacity: 0.2;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.node-editor .form .bbcode-toolbar #button-toggleTagCompletion span {
+  position: relative;
+  top: -3px;
+  font-size: 0.8em;
 }
 
 /* SPECIAL CHECKBOX START */
 .styled-checkbox input {
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
   outline: none;
   opacity: 0;
   display: none;
 }
 .styled-checkbox label {
-  padding-right: 4px;
-  padding-left: 4px;
+  display: inline-block;
+  text-align: center;
   color: grey;
-  border-radius: 12px;
-  border: 2px solid rgba(0, 0, 0, 0);
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+  width: 2rem;
+  height: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+span.styled-checkbox + span.styled-checkbox {
+  margin-left: 4px;
+  background-color: #e7e7e7;
+  border: 1px solid #ccc;
 }
 .styled-checkbox input:checked + label {
-  padding-right: 5px;
-  padding-left: 5px;
   color: black;
-  background-color: rgb(255, 248, 143);
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: #e7e7e7;
+  border: 1px solid #ccc;
 }
 /* SPECIAL CHECKBOX END */
 
@@ -659,7 +690,6 @@ a:hover {
   margin: 0;
   line-height: 1.5em;
   font-size: 0.9em;
-  color: #666;
   font-family: yarnFont;
   cursor: text;
 }
@@ -667,7 +697,7 @@ a:hover {
 .node-editor .form .editor-container {
   margin-top: 2px;
   width: 100%;
-  height: calc(100% - 85px);
+  height: calc(100% - 110px);
   float: left;
   overflow: hidden;
   position: relative;
@@ -682,7 +712,6 @@ a:hover {
   box-sizing: border-box;
   font-size: 0.9em;
   line-height: 1.5em;
-  color: #666;
   font-family: yarnFont;
   cursor: pointer;
   height: 100%;
@@ -725,19 +754,16 @@ a:hover {
   width: 100%;
   height: 100%;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.5);
 }
 
 .node-delete .form {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
   padding: 20px;
-  width: 200px;
-  height: 120px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0px 1px 1px #000;
+  width: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .node-delete .form .close {
@@ -746,6 +772,17 @@ a:hover {
   margin-right: auto;
   margin-top: 50px;
   background-position: -64px 0px;
+}
+
+.node-delete .form .buttons {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.node-delete .form .buttons button {
+  border: 1px;
+  padding: 5px 15px;
+  border-radius: 2px;
 }
 
 .styled-dropdown {
@@ -896,15 +933,15 @@ a:hover {
 
 header {
 	z-index: 10000;
-	position: absolute;
-	top: 0;
+  position: absolute;
+  top: 0;
 	left: 0;
 	width: 100%;
 	background: #444;
 	-webkit-app-region: drag;
 	-webkit-user-select: none;
 	display: flex;
-	font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 	header img {
@@ -921,7 +958,6 @@ header {
 
 		header .menu button {
 			color: #ccc;
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 			border: none;
 			background: transparent;
 			padding: 8px;
@@ -938,23 +974,25 @@ header {
 		header .menu ul.dropdown {
 			position: absolute;
 			display: none;
-			color: #ccc;
-			background: #111;
 			margin: 0;
-			padding: 8px 8px 3px 8px;
+			padding: 4px 0 4px 0;
 			list-style-type: none;
 			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 		}
 
 			header .menu ul.dropdown li {
-				margin: 0 40px 5px 20px;
+				padding: 2px 40px 2px 20px;
 			}
 
 			header .menu ul.dropdown hr {
-				background-color: #666;
 				border: 0;
-				height: 1px;
-			}
+        height: 1px;
+        margin: 4px 12px;
+      }
+      
+      header .menu #menu-darkmode {
+        display: none;
+      }
 
 	header #title {
 		flex-grow: 1;
@@ -984,4 +1022,19 @@ header {
 
 			header #frame-controls button#close:hover {
 				background: rgba(183, 28, 28, 1);
-			}
+      }
+      
+/* --- DROPBOX OVERRIDE --- */
+
+.dropbox-dropin-btn {
+  border: none !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  padding: none !important;
+  color: inherit !important;
+  display: inline !important;
+}
+
+.dropin-btn-status {
+  display: none !important;
+}
