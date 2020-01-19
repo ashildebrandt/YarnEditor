@@ -86,15 +86,11 @@ export var data = {
     var clone = filename;
 
     if (filename.toLowerCase().indexOf('.json') > -1) return FILETYPE.JSON;
-    else if (filename.toLowerCase().indexOf('.yarn.txt') > -1)
-      return FILETYPE.YARNTEXT;
-    else if (filename.toLowerCase().indexOf('.yarn') > -1)
-      return FILETYPE.YARNTEXT;
+    else if (filename.toLowerCase().indexOf('.yarn') > -1) return FILETYPE.YARNTEXT;
     else if (filename.toLowerCase().indexOf('.xml') > -1) return FILETYPE.XML;
     else if (filename.toLowerCase().indexOf('.txt') > -1) return FILETYPE.TWEE;
     else if (filename.toLowerCase().indexOf('.tw2') > -1) return FILETYPE.TWEE2;
-    else if (filename.toLowerCase().indexOf('.twee') > -1)
-      return FILETYPE.TWEE2;
+    else if (filename.toLowerCase().indexOf('.twee') > -1) return FILETYPE.TWEE2;
     return FILETYPE.UNKNOWN;
   },
 

@@ -35,11 +35,11 @@
         color: rgba(0, 0, 0, 0.75) !important;
     }
 
-    .node-delete {
+    .modal {
         background: rgba(255, 255, 255, 0.5);
     }
 
-    .node-delete .form {
+    .modal .form {
         background: #fff;
     }
 
@@ -47,7 +47,7 @@
         background: rgba(255, 255, 255, 0.5);
     }
 
-    .node-delete .buttons .delete {
+    .modal .buttons .delete {
         background: #0078d4;
         color: #fff;
     }

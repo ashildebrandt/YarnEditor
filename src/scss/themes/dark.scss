@@ -1,6 +1,6 @@
 #theme-dark {
 
-    #app-bg {
+    #app-bg.grad {
         background: -webkit-linear-gradient(45deg, #000 0%, #2c3546 100%);
     }
 
@@ -35,11 +35,11 @@
         color: rgba(255, 255, 255, 0.75) !important;
     }
 
-    .node-delete {
+    .modal {
         background: rgba(0, 0, 0, 0.5);
     }
 
-    .node-delete .form {
+    .modal .form {
         color: #ddd;
         background: #000;
     }
@@ -63,7 +63,7 @@
                 }
                 .ace-yarn  {
                 background: #111;
-                color: #ddd;
+                color: #ccc;
                 }
                 .ace-yarn .ace_comment {
                 color: #44fe66;
@@ -76,16 +76,16 @@
                 font-weight: bold;
                 }
                 .ace-yarn .ace_string.ace_llink {
-                color: #000;
+                color: rgb(255, 255, 255);
                 }
                 .ace-yarn .ace_string.ace_rlink {
                 color: #3ecfe9;
                 }
                 .ace-yarn .ace_string.ace_comm {
-                color: #e93ecf;
+                color: rgb(194, 139, 157);
                 }
                 .ace-yarn .ace_paren.ace_lcomm, .ace-yarn .ace_paren.ace_rcomm {
-                color: #e00ec0;
+                color: rgb(194, 139, 157);
                 }
                 .ace-yarn .ace_paren.ace_llink, .ace-yarn .ace_paren.ace_rlink {
                 color: #0ec0e0;
@@ -139,7 +139,7 @@
                 background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
                 }
 
-        .node-delete .buttons .delete {
+        .modal .buttons .delete {
         background: #0078d4;
         color: #fff;
     }
@@ -160,7 +160,7 @@
 
     .node .tags {
         border-top: 1px solid #333;
-        background: transparent;
+        background: #111;
     }
 
     .node .tags span {

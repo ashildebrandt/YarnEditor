@@ -48,17 +48,18 @@ export var App = function(name, version) {
   this.language = null;
   this.hasTouchScreen = false;
   this.snapOffset = [0, 0];
+  this.about = ko.observable(null);
   // this.fs = fs;
 
-  this.UPDATE_ARROWS_THROTTLE_MS = 25;
+  this.UPDATE_ARROWS_THROTTLE_MS = 3;
 
   // this.parser = new ini.Parser();
   this.configFilePath = null;
   this.config = {
     randomBackground: ko.observable(false),
     blurBackground: ko.observable(false),
-    darkTheme: ko.observable(true),
-    snap: ko.observable(true),
+    darkMode: ko.observable(true),
+    snap: ko.observable(false),
     spellcheckEnabled: true,
     transcribeEnabled: false,
     showCounter: false,
@@ -213,8 +214,10 @@ export var App = function(name, version) {
               app.snapOffset[1] += (pageY - offset.y);
               app.snapOffset[0] = app.snapOffset[0]%50;
               app.snapOffset[1] = app.snapOffset[1]%50;
+              $("#grid-bg").css("background-position", app.snapOffset[0]+"px "+app.snapOffset[1]+"px");
               offset.x = pageX;
               offset.y = pageY;
+              self.updateArrowsThrottled();
             }
           } else {
             MarqueeOn = true;
@@ -1715,10 +1718,20 @@ export var App = function(name, version) {
             y: toY - normal.y * dist * scale,
           };
 
-          self.context.strokeStyle =
-            'rgba(0, 0, 0, ' + node.tempOpacity * 0.6 + ')';
-          self.context.fillStyle =
-            'rgba(0, 0, 0, ' + node.tempOpacity * 0.6 + ')';
+          self.context.lineWidth = 1;
+          if(app.config.darkMode()) {
+            self.context.shadowColor = 'black';
+            self.context.shadowBlur = 10;
+            self.context.strokeStyle =
+              'rgba(255, 255, 255, ' + node.tempOpacity * 0.8 + ')';
+            self.context.fillStyle =
+              'rgba(255, 255, 255, 255)';
+          } else {
+            self.context.strokeStyle =
+              'rgba(0, 0, 0, ' + node.tempOpacity * 0.8 + ')';
+            self.context.fillStyle =
+              'rgba(0, 0, 0, 255)';
+          }
 
           // draw line
           self.context.beginPath();
@@ -1730,12 +1743,12 @@ export var App = function(name, version) {
           self.context.beginPath();
           self.context.moveTo(to.x + normal.x * 4, to.y + normal.y * 4);
           self.context.lineTo(
-            to.x - normal.x * 16 * scale - normal.y * 12 * scale,
-            to.y - normal.y * 16 * scale + normal.x * 12 * scale
+            to.x - normal.x * 8 * scale - normal.y * 6 * scale,
+            to.y - normal.y * 8 * scale + normal.x * 6 * scale
           );
           self.context.lineTo(
-            to.x - normal.x * 16 * scale + normal.y * 12 * scale,
-            to.y - normal.y * 16 * scale - normal.x * 12 * scale
+            to.x - normal.x * 8 * scale + normal.y * 6 * scale,
+            to.y - normal.y * 8 * scale - normal.x * 6 * scale
           );
           self.context.fill();
         }
@@ -1980,6 +1993,8 @@ export var App = function(name, version) {
 
   this.translate = function(speed) {
     var updateArrowsInterval = setInterval(self.updateArrowsThrottled, 16);
+
+    console.log("Changing zoom level: "+self.cachedScale);
 
     $('.nodes-holder').transition(
       {

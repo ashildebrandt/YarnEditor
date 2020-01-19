@@ -26,7 +26,7 @@ function CloseOpenMenus() {
 
 function RetrieveRandomBackground() {
     console.log("Retrieving new background");
-    $("#app-bg").css("background", "url(https://source.unsplash.com/collection/9402556/1920x1080?"+Date.now()+")");
+    $("#app-bg.image").css("background-image", "url(https://source.unsplash.com/collection/9402556/1920x1080?"+Date.now()+")");
 }
 
 /* Event bindings */
@@ -43,17 +43,17 @@ $('.menu button').mouseenter(function() {
 });
 
 $('#menu-darkmode').click(function() {
-    app.config.darkMode = true;
+    app.config.darkMode(true);
     $('body').attr('id', 'theme-dark');
-    $(this).hide();
+    $('#menu-darkmode').hide();
     $('#menu-lightmode').show();
 });
 
 $('#menu-lightmode').click(function() {
-    app.config.darkMode = false;
+    app.config.darkMode(false);
     $('body').attr('id', 'theme-light');
-    $(this).hide();
     $('#menu-darkmode').show();
+    $('#menu-lightmode').hide();
 });
 
 $('#menu-view-snap').click(function() {
@@ -70,9 +70,12 @@ $('#menu-view-randombackground').click(function() {
     if(app.config.randomBackground()) {
         console.log("Turning off random backgrounds");
         app.config.randomBackground(false);
+        $("#app-bg").removeClass("grad").removeClass("image").addClass("grad");
+        $("#app-bg").attr("style", ""); /* Webkit really doesn't want to lose the background image */
     } else {
         app.config.randomBackground(true);
         console.log("Turning on random backgrounds");
+        $("#app-bg").removeClass("image").removeClass("grad").addClass("image");
         RetrieveRandomBackground();
     }
 });
@@ -81,11 +84,11 @@ $('#menu-view-blur').click(function() {
     if(app.config.blurBackground()) {
         console.log("Turning off background blur");
         app.config.blurBackground(false);
-        $('#app-bg').css("filter", "initial");
+        $('#app-bg.image').css("filter", "initial");
     } else {
         app.config.blurBackground(true);
         console.log("Turning on background blur");
-        $('#app-bg').css("filter", "blur(10px)");
+        $('#app-bg.image').css("filter", "blur(10px)");
     }
 });
 
