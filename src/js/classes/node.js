@@ -285,17 +285,17 @@ export var Node = function() {
         var newX = pageX / self.getScale() - offset[0];
         var newY = pageY / self.getScale() - offset[1];
 
+        if(app.config.snap()) {
+          newX = (Math.ceil(newX / 50) * 50) + app.snapOffset[0];
+          newY = (Math.ceil(newY / 50) * 50) + app.snapOffset[1];
+        }
+
         var movedX = newX - self.x();
         var movedY = newY - self.y();
-
         moved = true;
-        if(app.config.snap()) {
-          self.x((Math.ceil(newX / 50) * 50) + app.snapOffset[0]);
-          self.y((Math.ceil(newY / 50) * 50) + app.snapOffset[1]);
-        } else {
-          self.x(newX);
-          self.y(newY);
-        }
+
+        self.x(newX);
+        self.y(newY);
 
         if (groupDragging) {
           var nodes = [];
@@ -308,13 +308,8 @@ export var Node = function() {
 
           if (nodes.length > 0) {
             for (var i in nodes) {
-              if(app.config.snap()) {
-                nodes[i].x((Math.ceil((nodes[i].x() + movedX) / 50) * 50) + app.snapOffset[0]);
-                nodes[i].y((Math.ceil((nodes[i].y() + movedY) / 50) * 50) + app.snapOffset[0]);
-              } else {
-                nodes[i].x(nodes[i].x() + movedX);
-                nodes[i].y(nodes[i].y() + movedY);
-              }
+              nodes[i].x(nodes[i].x() + movedX);
+              nodes[i].y(nodes[i].y() + movedY);
             }
           }
         }
