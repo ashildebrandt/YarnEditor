@@ -24,8 +24,6 @@ export var Node = function() {
   this.tags = ko.observable('');
   this.body = ko.observable('Empty Text');
   this.titleColorClass = ko.observable("col1");
-  //this.x = ko.observable(128);
-  //this.y = ko.observable(128);
   this.active = ko.observable(true);
   this.tempWidth;
   this.tempHeight;

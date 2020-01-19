@@ -2,8 +2,7 @@ define("ace/theme/yarn",["require","exports","module","ace/lib/dom"], function(r
 
 exports.isDark = false;
 exports.cssClass = "ace-yarn";
-exports.cssText = "";
 
-    // var dom = require("../lib/dom");
-    // dom.importCssString(exports.cssText, exports.cssClass);
+// Actual css rules are now located in the theme SCSS files
+
 });
