@@ -140,7 +140,7 @@
                 }
 
         .modal .buttons .delete {
-        background: #0078d4;
+        background: rgb(99, 36, 36);
         color: #fff;
     }
 
@@ -172,5 +172,16 @@
         border: 1px solid rgb(113, 169, 214);
         background-color: rgba(113, 169, 214, 0.2);
     }
+
+    #add-node {
+        background: #222;
+        color: #fff;
+        border: 1px solid #222;
+    }
+
+        #add-node:hover {
+            border: 1px solid rgb(113, 169, 214);
+            cursor: pointer;
+        }
 
 }

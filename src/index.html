@@ -142,12 +142,12 @@
 					<span data-bind="click: function() { app.zoom(1); }" title="Zoom 4:1"></span>
 				</div>
 
+				<div id="add-node" data-bind="click:app.newNode">
+					<i class="ms-Icon ms-Icon--Add"></i>
+				</div>
+
 				<!-- navigation / menu -->
 				<div class="app-menu">
-					<div class="menu">
-						<span class="title" data-bind="click:app.newNode">+ Node</span>
-					</div>
-
 					<div class="menu">
 						<span class="title" onmouseover="app.openNodeListMenu('open')">Open</span>
 						<div class="dropdown">

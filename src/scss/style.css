@@ -82,7 +82,6 @@ a:hover {
 ::-webkit-scrollbar {
   background: transparent;
   width: 8px;
-  cursor: pointer;
 }
 ::-webkit-scrollbar-button {
   display: none;
@@ -239,6 +238,19 @@ a:hover {
 .app-menu .menu:active .title {
   background: #ddd;
   color: #555;
+}
+
+#add-node {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  text-align: center;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
 /* --- NODE SEARCH--- */
