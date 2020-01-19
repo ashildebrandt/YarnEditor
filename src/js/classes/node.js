@@ -291,10 +291,9 @@ export var Node = function() {
         var movedY = newY - self.y();
 
         moved = true;
-        var snap = true;
-        if(snap) {
-          self.x(Math.ceil(newX / 50) * 50);
-          self.y(Math.ceil(newY / 50) * 50);
+        if(app.snap) {
+          self.x((Math.ceil(newX / 50) * 50) + app.snapOffset[0]%50);
+          self.y((Math.ceil(newY / 50) * 50) + app.snapOffset[1]%50);
         } else {
           self.x(newX);
           self.y(newY);

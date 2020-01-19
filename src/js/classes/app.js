@@ -47,6 +47,8 @@ export var App = function(name, version) {
   this.selectedLanguageIndex = 6;
   this.language = null;
   this.hasTouchScreen = false;
+  this.snap = true;
+  this.snapOffset = [0, 0];
   // this.fs = fs;
 
   this.UPDATE_ARROWS_THROTTLE_MS = 25;
@@ -206,8 +208,11 @@ export var App = function(name, version) {
                   nodes[i].y() + (pageY - offset.y) / self.cachedScale
                 );
               }
+              app.snapOffset[0] += (pageX - offset.x);
+              app.snapOffset[1] += (pageY - offset.y);
               offset.x = pageX;
               offset.y = pageY;
+              console.log(app.snapOffset);
             }
           } else {
             MarqueeOn = true;
