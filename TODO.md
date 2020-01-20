@@ -6,6 +6,6 @@ Added:
 * Finish theming ACE
 * Move / theme search
 * Open search
-* Serif writing option
+* Serif writing option?
 * Fix iPad compatibility
 * Add filename to title

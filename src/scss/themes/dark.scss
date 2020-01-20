@@ -197,4 +197,34 @@
             color: #fff;
         }
 
+        #search-controls label {
+            border: 1px solid #222;
+            background: #111;
+            color: #aaa;
+        }
+        
+        #search-controls input:checked + label {
+            border: 1px solid rgb(113, 169, 214);
+            background: #333;
+            color: #fff;
+        }
+
+        #search-controls span.button {
+            margin-left: 1rem;
+            background: #222;
+            color: #fff;
+            border: 1px solid #222;
+        }
+    
+            #search-controls span.button:hover {
+                border: 1px solid rgb(113, 169, 214);
+                cursor: pointer;
+            }
+
+        #search-controls ul li {
+            color: #ddd;
+            background: #111;
+            border-bottom: 1px solid #444;
+        }
+
 }

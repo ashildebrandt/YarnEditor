@@ -9,7 +9,7 @@ const bbcode = require('bbcode');
 
 export var Node = function() {
   var self = this;
-  this.titleColorValues = [
+  this.lightTitleColorValues = [
     '#eee',
     '#F48FB1',
     '#B39DDB',
@@ -18,6 +18,16 @@ export var Node = function() {
     '#A5D6A7',
     '#FFF59D'
   ];
+  this.darkTitleColorValues = [
+    'rgba(51, 51, 51, .5)',
+    'rgba(121, 61, 81, .5)',
+    'rgba(77, 59, 110, .5)',
+    'rgba(64, 104, 136, .5)',
+    'rgba(61, 117, 124, .5)',
+    'rgba(49, 100, 51, .5)',
+    'rgba(104, 99, 51, .5)'
+  ];
+
   // primary values
   this.index = ko.observable(globalNodeIndex++);
   this.title = ko.observable('Node' + this.index());
@@ -180,6 +190,7 @@ export var Node = function() {
         else app.addNodeSelected(self);
       }
     });
+    app.updateNodeListMenu('open');
   };
 
   this.setSelected = function(select) {
@@ -221,8 +232,8 @@ export var Node = function() {
     self.canDoubleClick = false;
 
     if (app.shifted) app.matchConnectedColorID(self);
-
     if (self.selected) app.setSelectedColors(self);
+    app.updateNodeListMenu('open');
   };
 
   this.cycleColorUp = function() {
@@ -232,8 +243,8 @@ export var Node = function() {
     self.canDoubleClick = false;
 
     if (app.shifted) app.matchConnectedColorID(self);
-
     if (self.selected) app.setSelectedColors(self);
+    app.updateNodeListMenu('open');
   };
 
   this.doCycleColorDown = function() {
@@ -261,6 +272,7 @@ export var Node = function() {
       }
     );
     app.deleting(null);
+    app.updateNodeListMenu('open');
   };
 
   this.drag = function() {

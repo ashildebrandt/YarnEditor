@@ -242,6 +242,7 @@ export var data = {
         avgY += parseInt(object.position.y);
       }
       if (object.colorID != undefined) node.colorID(object.colorID);
+      $(node.element).addClass("col"+node.colorID());
     }
 
     if (numAvg > 0) {

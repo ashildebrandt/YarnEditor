@@ -49,6 +49,7 @@ export var App = function(name, version) {
   this.hasTouchScreen = false;
   this.snapOffset = [0, 0];
   this.about = ko.observable(null);
+  this.nodeListOpen = false;
   // this.fs = fs;
 
   this.UPDATE_ARROWS_THROTTLE_MS = 3;
@@ -1492,9 +1493,10 @@ export var App = function(name, version) {
     );
   };
 
-  this.openNodeListMenu = function(action) {
-    var helperLinkSearch = document.getElementById(action + 'HelperMenuFilter')
-      .value;
+  this.updateNodeListMenu = function(action) {
+    if(action == 'open') {
+      var helperLinkSearch = $('#nodeSearchInput').val();
+    }
     var rootMenu = document.getElementById(action + 'HelperMenu');
     rootMenu.innerHTML = '';
 
@@ -1506,10 +1508,14 @@ export var App = function(name, version) {
           .indexOf(helperLinkSearch) >= 0 ||
         helperLinkSearch.length == 0
       ) {
-        var p = document.createElement('span');
+        var p = document.createElement('li');
         p.innerHTML = node.title();
         p.setAttribute('class', 'item');
-        var pColor = node.titleColorValues[app.nodes()[i].colorID()];
+        if(this.config.darkMode) {
+          var pColor = node.darkTitleColorValues[app.nodes()[i].colorID()];
+        } else {
+          var pColor = node.lightTitleColorValues[app.nodes()[i].colorID()];
+        }
         p.setAttribute('style', 'background:' + pColor + ';');
 
         if (action == 'link') {
@@ -1532,9 +1538,9 @@ export var App = function(name, version) {
               .indexOf(helperLinkSearch) >= 0 ||
             helperLinkSearch.length == 0
           ) {
-            p.setAttribute('onclick', `app.openNodeByTitle("${node.title()}")`);
+            p.setAttribute('ondblclick', `app.openNodeByTitle("${node.title()}")`);
             p.setAttribute(
-              'onmouseover',
+              'onclick',
               `app.warpToNodeIdx(${self.nodes.indexOf(node)})`
             );
             rootMenu.appendChild(p);
@@ -1559,9 +1565,9 @@ export var App = function(name, version) {
 
   this.updateSearch = function() {
     var search = self.$searchField.val().toLowerCase();
-    var title = $('.search-title input').is(':checked');
-    var body = $('.search-body input').is(':checked');
-    var tags = $('.search-tags input').is(':checked');
+    var title = $('input#search-title').is(':checked');
+    var body = $('input#search-body').is(':checked');
+    var tags = $('input#search-tags').is(':checked');
 
     var on = 1;
     var off = 0.25;

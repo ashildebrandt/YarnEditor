@@ -96,6 +96,27 @@ $('#menu-view-refresh').click(function() {
     RetrieveRandomBackground();
 });
 
+$('#node-list').click(function () {
+    app.nodeListOpen = !app.nodeListOpen;
+    $(this).toggleClass('rotated');
+    if(app.nodeListOpen) {
+        console.log("Opening node list");
+        app.updateNodeListMenu('open');
+        $("#search-controls").removeClass("open").addClass("open");
+        $("#openHelperMenu").slideDown();
+    } else {
+        console.log("Closing node list");
+        $("#search-controls").removeClass("open");
+        $("#openHelperMenu").slideUp();
+    }
+});
+
+$('#nodeSearchInput').on("change paste keyup", function() {
+    if(app.nodeListOpen) {
+        app.updateNodeListMenu('open');
+    }
+});
+
 $(document).click(function() {
     if(menuOpen && !clickingMenu) {
         CloseOpenMenus();

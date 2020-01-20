@@ -19,7 +19,6 @@
 				<div class="menu">
 					<button id="file">File</button>
 					<ul class="dropdown" id="menu-file">
-
 						<li id="menu-open" data-bind="click: app.data.tryOpenFile">Open...</li>
 						<li id="menu-append" data-bind="click: app.data.tryAppend">Append...</li>
 						<hr/>
@@ -34,8 +33,8 @@
 						<hr/>
 						<li class="disabled" id="menu-load-dropbox" data-bind="click: function() { app.data.tryLoadDropbox();}">Load from Dropbox...</li>
 						<li class="disabled" id="menu-save-dropbox" data-bind="click: function() { app.data.trySaveDropbox();}">Save to Dropbox...</li>
-						<hr/>
-						<li id="menu-exit">Exit</li>
+						<hr data-bind="visible:app.isElectron;" />
+						<li id="menu-exit" data-bind="visible:app.isElectron; click:remote.app.quit();">Exit</li>
 					</ul>
 				</div>
 				<div class="menu">
@@ -85,14 +84,14 @@
 				</div>
 				<div id="title" data-bind="text:app.name"></div>
 				<div id="frame-controls">
-					<button id="minimize">
-						<svg x="0px" y="0px" viewBox="0 0 10.2 1"><rect x="0" y="50%" width="10.2" height="1" /></svg>
+					<button id="minimize" data-bind="click:app.close">
+						
 					</button>
 					<button id="maximize">
-						<svg viewBox="0 0 10 10"><path d="M0,0v10h10V0H0z M9,9H1V1h8V9z" /></svg>
+						
 					</button>
 					<button id="close">
-						<svg viewBox="0 0 10 10"><polygon points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1" /></svg>
+						
 					</button>
 			</header>
 
@@ -139,28 +138,25 @@
 				</div>
 				<div id="search-controls">
 					<input id="nodeSearchInput" type="text" class="search-field" placeholder="Search"/>
-					<span class="search-title styled-checkbox">
-						<input type="checkbox" checked="checked" id="search-title" />
-						<label for="search-title" title="Search titles"><i class="ms-Icon ms-Icon--FontColorA"></i></label>
+					<input type="checkbox" checked="checked" id="search-title" />
+					<label for="search-title" title="Search titles"><i class="ms-Icon ms-Icon--FontColorA"></i></label>
+					<input type="checkbox" id="search-body" />
+					<label for="search-body" title="Search bodies"><i class="ms-Icon ms-Icon--AlignLeft"></i></label>
+					<input type="checkbox" id="search-tags" />
+					<label for="search-tags" title="search tags"><i class="ms-Icon ms-Icon--Tag"></i></label>
+					<span class="button" id="node-list" title="Open node list">
+						<i class="ms-Icon ms-Icon--ChevronDownSmall"></i>
 					</span>
-					<span class="search-body styled-checkbox">
-						<input type="checkbox" id="search-body" />
-						<label for="search-body" title="Search bodies"><i class="ms-Icon ms-Icon--AlignLeft"></i></label>
-					</span>
-					<span class="search-tags styled-checkbox">
-						<input type="checkbox" id="search-tags" />
-						<label for="search-tags" title="search tags"><i class="ms-Icon ms-Icon--Tag"></i></label>
-					</span>
+					<ul id="openHelperMenu" style="display: none;"></ul>
 				</div>
 
-				<!-- navigation / menu -->
 				<!--
 				<div class="app-menu">
 					<div class="menu">
 						<span class="title" onmouseover="app.openNodeListMenu('open')">Open</span>
 						<div class="dropdown">
 							<input id="openHelperMenuFilter" class="search-field" placeholder="search" type="text"  oninput="app.openNodeListMenu('open')"></input>
-							<div  id="openHelperMenu" ></div>
+							<div id="openHelperMenu" ></div>
 						</div>
 					</div>
 				</div>

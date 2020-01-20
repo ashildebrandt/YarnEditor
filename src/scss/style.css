@@ -60,6 +60,12 @@ select,
   outline: none;
 }
 
+ul, li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 input[type='checkbox'] {
   width: 20px;
   height: 20px;
@@ -254,17 +260,65 @@ a:hover {
   transition: opacity 0.25s;
 }
 
-  #search-controls:hover, #search-controls:focus-within {
+  #openHelperMenu {
+    backdrop-filter: blur(5px);
+  }
+
+  #node-list.rotated {
+    transition: transform 0.25s;
+    transform: rotate(180deg);
+  }
+
+  #search-controls:hover, #search-controls:focus-within, #search-controls.open {
     opacity: 1;
   }
 
   #search-controls input[type=text] {
+    /* TODO: Why is this alignment so wonky? */
+    display: inline-block;
+    position: relative;
+    top: -0.35rem;
     width: 18rem;
     height: 2rem;
     border: none;
-    margin: 0.5rem 0 0 0.5rem;
+    margin: 0 0.5rem 0 1rem;
     box-sizing: border-box;
-    padding-left: 0.5rem;
+    padding: 0 0 0 0.5rem;
+  }
+
+  #search-controls input[type=checkbox] {
+    display: none;
+  }
+  
+  #search-controls label {
+    /* TODO: Why is this alignment so wonky? */
+    display: inline-block;
+    position: relative;
+    top: -0.22rem;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  #search-controls span.button {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    box-sizing: border-box;
+    transition: border 0.1s;
+    font-size: 1.25rem;
+    line-height: 3rem;
+    text-align: center;
+  }
+
+  #search-controls ul li {
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 1rem;
   }
 
 #hover-controls {
@@ -663,34 +717,6 @@ a:hover {
   position: relative;
   top: -3px;
   font-size: 0.8em;
-}
-
-/* SPECIAL CHECKBOX START */
-
-span.styled-checkbox {
-  display: inline-block;
-  width: 2rem;
-  height: 2rem;
-}
-
-span.styled-checkbox input {
-  display: none;
-}
-
-.styled-checkbox input + label {
-  color: black;
-  background-color: #e7e7e7;
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid #ccc;
-}
-
-.styled-checkbox input:checked + label {
-  color: white;
-  background-color: #e7e7e7;
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid #ccc;
 }
 
 /* SPECIAL CHECKBOX END */
