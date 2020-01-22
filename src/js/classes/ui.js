@@ -103,11 +103,23 @@ $('#node-list').click(function () {
         console.log("Opening node list");
         app.updateNodeListMenu('open');
         $("#search-controls").removeClass("open").addClass("open");
-        $("#openHelperMenu").slideDown();
+        $("#openHelperMenu")
+            .css('opacity', 0)
+            .slideDown()
+            .animate(
+                { opacity: 1 },
+                { queue: false }
+            );
     } else {
         console.log("Closing node list");
         $("#search-controls").removeClass("open");
-        $("#openHelperMenu").slideUp();
+        $("#openHelperMenu")
+            .css('opacity', 1)
+            .slideUp()
+            .animate(
+                { opacity: 0 },
+                { queue: false }
+            );
     }
 });
 
@@ -125,7 +137,5 @@ $(document).click(function() {
 });
 
 $(document).ready(function() {
-    if(!app.isElectron) {
-        $("#frame-controls").hide();
-    }
+
 });

@@ -44,11 +44,6 @@
 						<li data-bind="click: app.arrangeY" id="menu-arrange-vertical">Vertical</li>
 						<li data-bind="click: app.arrangeSpiral" id="menu-arrange-spiral">Spiral</li>
 						<li data-bind="click: app.sortAlphabetical" id="menu-arrange-grid">Alphabetical Grid</li>
-						<hr/>
-						<li id="menu-arrange-showbar">
-							<span class="check"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
-							Show Arrangement Bar
-						</li>
 					</ul>
 				</div>
 				<div class="menu">
@@ -84,14 +79,14 @@
 				</div>
 				<div id="title" data-bind="text:app.name"></div>
 				<div id="frame-controls">
-					<button id="minimize" data-bind="click:app.close">
-						
+					<button id="minimize">
+						<i class="ms-Icon ms-Icon--ChromeMinimize"></i>
 					</button>
 					<button id="maximize">
-						
+						<i class="ms-Icon ms-Icon--ChromeRestore"></i>
 					</button>
-					<button id="close">
-						
+					<button id="close" data-bind="click:app.close">
+						<i class="ms-Icon ms-Icon--ChromeClose"></i>
 					</button>
 			</header>
 
@@ -268,7 +263,7 @@
 								<select class="styled-dropdown" id="select_language" onchange="app.updateCountry()">
 								</select>
 							</span>
-
+							<!--
 							<div class="app-menu">
 								<div class="menu">
 									<span class="title" onmouseover="app.openNodeListMenu('link')">Add Link</span>
@@ -278,6 +273,7 @@
 									</div>
 								</div>
 							</div>
+							-->
 
 						</div>
 
@@ -384,7 +380,7 @@
 							>
 							</div> 
 						</div>
-						<span class="editor-counter">
+						<div class="editor-counter">
 							Length: <span class="character-count">0</span>
 							&nbsp;
 							Lines: <span class="line-count">0</span>
@@ -394,7 +390,7 @@
 							Line: <span class="row-index">0</span>
 							&nbsp;
 							Col: <span class="column-index">0</span>
-						</span>
+						</div>
 
 						<!--<div class="icon close" data-bind="click:app.saveNode"></div>-->
 

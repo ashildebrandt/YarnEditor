@@ -1,11 +1,13 @@
 Added:
-* New UI w/ dark theme and a revamped light theme
+* New UI w/ dark and light themes
 * Snap to grid
 * Background image support
+* Combined search / filter and node list
 
-* Finish theming ACE
-* Move / theme search
-* Open search
+
+* Finish ACE themes
+* Add filename to title
+* Bring light theme up to speed
 * Serif writing option?
 * Fix iPad compatibility
-* Add filename to title
+* Last few Electron hookups

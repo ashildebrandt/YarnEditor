@@ -42,6 +42,7 @@
     .modal .form {
         color: #ddd;
         background: #000;
+        border: 1px solid #333;
     }
 
     .node-editor {
@@ -50,7 +51,24 @@
 
         .node-editor .form {
             background: #333;
+            border: 1px solid #333;
         }
+
+            .node-editor .form .bbcode-toolbar .bbcode-button {
+                color: #ddd;
+            }
+
+            .node-editor .form .bbcode-toolbar .bbcode-button:hover {
+                border: 1px solid rgb(113, 169, 214);
+            }
+
+            .node-editor .form .bbcode-toolbar .bbcode-button.active {
+                background: rgba(113, 169, 214, 0.25);
+            }
+
+            .node-editor .form .bbcode-toolbar hr {
+                background: #666;
+            }
 
             .node-editor .form .editor {
                 background: #111;
@@ -189,11 +207,11 @@
         }
 
     #search-controls {
-        background: #444;
+        background: #222;
     }
 
         #search-controls input[type=text] {
-            background: #222;
+            background: #444;
             color: #fff;
         }
 
@@ -226,5 +244,14 @@
             background: #111;
             border-bottom: 1px solid #444;
         }
+
+    .editor-counter {
+        color: #fff;
+        background: rgb(64, 104, 136);
+    }
+
+    .node-editor .form input[type='text'] {
+        background: #444;
+    }
 
 }

@@ -264,10 +264,14 @@ a:hover {
     backdrop-filter: blur(5px);
   }
 
-  #node-list.rotated {
-    transition: transform 0.25s;
-    transform: rotate(180deg);
+  #node-list {
+    margin-left: 0 !important;
   }
+
+    #node-list.rotated {
+      transition: transform 0.25s;
+      transform: rotate(180deg);
+    }
 
   #search-controls:hover, #search-controls:focus-within, #search-controls.open {
     opacity: 1;
@@ -281,7 +285,7 @@ a:hover {
     width: 18rem;
     height: 2rem;
     border: none;
-    margin: 0 0.5rem 0 1rem;
+    margin: 0 0.5rem 0 0.5rem;
     box-sizing: border-box;
     padding: 0 0 0 0.5rem;
   }
@@ -569,7 +573,6 @@ a:hover {
 
 .node .delete {
   right: 4px;
-  background-position: -32px 0px;
 }
 
 .node .colorUp {
@@ -617,20 +620,18 @@ a:hover {
 
 .node-editor {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 200;
 }
 
 .node-editor .form {
-  position: absolute;
   box-sizing: border-box;
-  left: 5%;
-  top: 5%;
   width: 90%;
-  height: 90%;
-  padding: 20px 20px 40px 20px;
-  border-radius: 4px;
+  height: calc(100% - 6rem);
+  margin: 4rem auto 0 auto;
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
@@ -644,22 +645,23 @@ a:hover {
 
 .node-editor .form input[type='text'] {
   box-sizing: border-box;
+  display: block;
   width: 100%;
+  height: 2rem;
   font-size: 1.2em;
-  padding: 10px 0px 10px 0px;
-  margin-bottom: 5px;
+  padding: 10px;
   border: none;
-  border-bottom: 2px solid #eee;
+  border-bottom: 1px solid #666;
   font-family: 'Lucida Console', Monaco, monospace;
 }
 
 .node-editor .form .bbcode-toolbar {
-  float: left;
+  box-sizing: border-box;
   width: 100%;
   font-size: 0.8em;
-  margin: .25rem 0;
-  overflow: auto;
-  display: flex;
+  height: 2rem;
+  line-height: 2rem;
+  margin-left: .5rem;
 }
 
 .node-editor .form .bbcode-toolbar hr {
@@ -668,35 +670,20 @@ a:hover {
   border: none;
   width: 1px;
   height: 1.5rem;
-  background: #ccc;
   margin: 0 0.5rem;
-  top: 0.1rem;
+  top: 0.35rem;
 }
 
 .node-editor .form .bbcode-toolbar .bbcode-button {
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0);
   text-align: center;
-  background-color: white;
-  color: black;
+  background: transparent;
   text-decoration: none;
+  border: 1px solid transparent;
   display: inline-block;
   padding-top: 4px;
   font-size: .9rem;
   width: 2rem;
-}
-
-.node-editor .form .bbcode-toolbar .bbcode-button:hover {
-  background: #e7e7e7;
-  border: 1px solid #ccc;
-}
-
-.node-editor .form .bbcode-toolbar .bbcode-button:active {
-  background: #e7e7e7;
-}
-
-.node-editor .form .bbcode-toolbar .bbcode-button.active {
-  background: #e7e7e7;
 }
 
 .node-editor .form .bbcode-toolbar .bbcode-button.active:hover {
@@ -719,18 +706,20 @@ a:hover {
   font-size: 0.8em;
 }
 
-/* SPECIAL CHECKBOX END */
-
-.node-editor .form .bbcode-toolbar .editor-counter {
-  right: 20px;
+.node-editor .editor-counter {
+  font-size: 0.75rem;
   width: 100%;
-  color: #666;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: right;
+  box-sizing: border-box;
+  padding-right: 0.5rem;
 }
 
 .node-editor .form .editor {
   white-space: pre;
   box-sizing: border-box;
-  min-height: 100%;
+  height: 100%;
   padding: 0;
   margin: 0;
   line-height: 1.5em;
@@ -740,10 +729,8 @@ a:hover {
 }
 
 .node-editor .form .editor-container {
-  margin-top: 2px;
   width: 100%;
-  height: calc(100% - 110px);
-  float: left;
+  height: calc(100% - 7.5rem);
   overflow: hidden;
   position: relative;
 }
@@ -989,6 +976,7 @@ header {
 	-webkit-user-select: none;
 	display: flex;
   font-size: 0.8rem;
+  height: 2rem;
 }
 
 	header img {
@@ -1006,8 +994,9 @@ header {
 		header .menu button {
 			color: #ccc;
 			border: none;
-			background: transparent;
-			padding: 8px;
+      background: transparent;
+      line-height: 2rem;
+			padding: 0 8px;
 		}
 
 			header .menu button:hover {
@@ -1050,7 +1039,7 @@ header {
 		flex-grow: 1;
 		text-align: center;
 		color: #ccc;
-		margin-top: 4px;
+    line-height: 2rem;
 	}
 
 	header #frame-controls {
@@ -1059,18 +1048,15 @@ header {
 
 		header #frame-controls button {
 			margin: 0;
-			width: 48px;
-			height: 32px;
+      width: 2.5rem;
+      padding: 0;
+      font-size: .7rem;
 			border: 0;
 			outline: 0;
 			background: transparent;
-			fill: #fff;
+      line-height: 2rem;
+      color: #ccc;
 		}
-
-			header #frame-controls button svg {
-				width: 10px;
-				height: 10px;
-			}
 
 			header #frame-controls button#close:hover {
 				background: rgba(183, 28, 28, 1);
