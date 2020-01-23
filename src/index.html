@@ -38,12 +38,14 @@
 					</ul>
 				</div>
 				<div class="menu">
-					<button id="arrange">Arrange</button>
-					<ul class="dropdown" id="menu-arrange">
-						<li data-bind="click: app.arrangeX" id="menu-arrange-horizontal">Horizontal</li>
-						<li data-bind="click: app.arrangeY" id="menu-arrange-vertical">Vertical</li>
-						<li data-bind="click: app.arrangeSpiral" id="menu-arrange-spiral">Spiral</li>
-						<li data-bind="click: app.sortAlphabetical" id="menu-arrange-grid">Alphabetical Grid</li>
+					<button id="nodes">Nodes</button>
+					<ul class="dropdown" id="menu-nodes">
+						<li data-bind="click:app.newNode" id="menu-nodes-horizontal">Add new node</li>
+						<hr/>
+						<li data-bind="click: app.arrangeX" id="menu-nodes-horizontal">Arrange Horizontal</li>
+						<li data-bind="click: app.arrangeY" id="menu-nodes-vertical">Arrange Vertical</li>
+						<li data-bind="click: app.arrangeSpiral" id="menu-nodes-spiral">Arrange Spiral</li>
+						<li data-bind="click: app.sortAlphabetical" id="menu-nodes-grid">Arrange Alphabetical Grid</li>
 					</ul>
 				</div>
 				<div class="menu">
