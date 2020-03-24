@@ -163,7 +163,7 @@
     }
 
     .node {
-        background: rgba(10, 10, 10, 0.75);
+        background: rgba(10, 10, 10, 0.25);
         border: 1px solid #555;
     }
 
@@ -252,6 +252,27 @@
 
     .node-editor .form input[type='text'] {
         background: #444;
+        color: #fff;
     }
+
+    .linkname {
+        color: #3ecfe9;
+    }
+      
+      .linkbounds {
+        color: #0ec0e0;
+      }
+      
+      .condition {
+        color: #e93ecf;
+      }
+      
+      .conditionbounds {
+        color: #e00ec0;
+      }
+      
+      .comment {
+        color: #44fe66;
+      }
 
 }

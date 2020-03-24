@@ -2,6 +2,7 @@
 
 var menuOpen = null;
 var clickingMenu = false;
+var autosaveInterval;
 
 /* Functions */
 
@@ -63,6 +64,18 @@ $('#menu-view-snap').click(function() {
     } else {
         console.log("Turning on snapping");
         app.config.snap(true);
+    }
+});
+
+$('#menu-file-autosave').click(function() {
+    if(app.config.autosave()) {
+        console.log("Turning off autosave");
+        app.config.autosave(false);
+        clearInterval(autosaveInterval);
+    } else {
+        console.log("Turning on autosave");
+        app.config.autosave(true);
+        autosaveInterval = setInterval(function(){ app.data.trySave('yarn'); }, 300000);
     }
 });
 
@@ -134,8 +147,4 @@ $(document).click(function() {
         CloseOpenMenus();
     }
     clickingMenu = false;
-});
-
-$(document).ready(function() {
-
 });

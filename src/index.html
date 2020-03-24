@@ -33,6 +33,11 @@
 						<hr/>
 						<li class="disabled" id="menu-load-dropbox" data-bind="click: function() { app.data.tryLoadDropbox();}">Load from Dropbox...</li>
 						<li class="disabled" id="menu-save-dropbox" data-bind="click: function() { app.data.trySaveDropbox();}">Save to Dropbox...</li>
+						<hr/>
+						<li id="menu-file-autosave">
+							<span class="check" data-bind="visible: app.config.autosave"><i class="ms-Icon ms-Icon--CheckMark"></i></span>
+							Autosave (5 minutes)
+						</li>
 						<hr data-bind="visible:app.isElectron;" />
 						<li id="menu-exit" data-bind="visible:app.isElectron; click:remote.app.quit();">Exit</li>
 					</ul>
@@ -371,6 +376,7 @@
 						</div>
 						-->
 
+
 						<div class="editor-container">
 							<div class="editor-preview" id="editor-preview" onclick="app.togglePreviewMode(false)"></div>
 							<div class="editor" id="editor"
@@ -381,6 +387,9 @@
 							enableLiveAutocompletion: true }"
 							>
 							</div> 
+						</div>
+						<div id="editor-container">
+							HEre
 						</div>
 						<div class="editor-counter">
 							Length: <span class="character-count">0</span>

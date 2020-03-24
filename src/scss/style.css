@@ -759,26 +759,6 @@ a:hover {
   padding: 0;
 }
 
-.linkname {
-  color: #3ecfe9;
-}
-
-.linkbounds {
-  color: #0ec0e0;
-}
-
-.condition {
-  color: #e93ecf;
-}
-
-.conditionbounds {
-  color: #e00ec0;
-}
-
-.comment {
-  color: #44fe66;
-}
-
 /* --- MODALS --- */
 
 .modal {

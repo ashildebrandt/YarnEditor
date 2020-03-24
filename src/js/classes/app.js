@@ -1,9 +1,3 @@
-import {
-  enable_spellcheck,
-  disable_spellcheck,
-  suggest_word_for_misspelled,
-  load_dictionary,
-} from '../libs/spellcheck_ace.js';
 import { Node } from './node';
 import { data } from './data';
 import { Utils, FILETYPE } from './utils';
@@ -61,6 +55,7 @@ export var App = function(name, version) {
     blurBackground: ko.observable(false),
     darkMode: ko.observable(true),
     snap: ko.observable(false),
+    autosave: ko.observable(false),
     spellcheckEnabled: true,
     transcribeEnabled: false,
     showCounter: false,
@@ -647,15 +642,18 @@ export var App = function(name, version) {
     };
 
     this.updateCountry = function() {
+      /*
       var select_language = document.getElementById('select_language');
       self.selectedLanguageIndex = select_language.selectedIndex;
 
       self.language = Utils.langs[select_language.selectedIndex][1][0];
       spoken.recognition.lang = self.language;
       load_dictionary(self.language.split('-')[0]);
+      */
     };
 
     this.speakText = function() {
+      /*
       const selectedText = self.editor.getSelectedText();
       const say = selectedText
         ? selectedText
@@ -672,9 +670,11 @@ export var App = function(name, version) {
           spoken.say(say);
         }
       });
+      */
     };
 
     this.startCapture = function() {
+      /*
       spoken
         .listen({ continuous: true })
         .then(transcript => {
@@ -708,6 +708,7 @@ export var App = function(name, version) {
           });
         })
         .catch(e => spoken.listen.stop().then(() => this.continueCapture()));
+        */
     };
 
     this.continueCapture = function() {
@@ -1090,10 +1091,6 @@ export var App = function(name, version) {
       self.toggleWordCompletion(self.config.autocompleteWordsEnabled);
       self.toggleTagCompletion(self.config.autocompleteTagsEnabled);
 
-      // var spellCheckButton = document.getElementById('toglSpellCheck');
-      // spellCheckButton.checked = self.config.spellcheckEnabled;
-      // var transcribeButton = document.getElementById('toglTranscribing');
-      // transcribeButton.checked = self.config.transcribeEnabled;
       self.toggleTranscribing();
       var showCounterButton = document.getElementById('toglShowCounter');
       // showCounterButton.checked = self.config.showCounter;
@@ -1135,20 +1132,18 @@ export var App = function(name, version) {
         clickoutFiresChange: true,
       });
 
-      /// Enable autocompletion for node links (borked atm)
-      var langTools = ace.require('ace/ext/language_tools');
       var nodeLinksCompleter = Utils.createAutocompleter(
         ['string.llink', 'string.rlink'],
         self.getOtherNodeTitles(),
         'Node Link'
       );
-      langTools.addCompleter(nodeLinksCompleter);
 
       if (!self.nodeVisitHistory.includes(node.title())) {
         self.nodeVisitHistory.push(node.title());
       }
 
       // close tag autocompletion
+      /*
       self.editor.getSession().on('change', function(evt) {
         if (evt.action === 'insert') {
           if (self.config.autoCompleteButton) {
@@ -1189,6 +1184,7 @@ export var App = function(name, version) {
           }
         }
       });
+      */
 
       /// init emoji picker
       this.emPicker = new EmojiPicker(
@@ -2221,6 +2217,7 @@ export var App = function(name, version) {
   };
 
   this.updateEditorStats = function() {
+    /*
     var text = self.editor.getSession().getValue();
     var cursor = self.editor.getCursorPosition();
 
@@ -2229,5 +2226,6 @@ export var App = function(name, version) {
     $('.editor-counter .line-count').html(lines.length);
     $('.editor-counter .row-index').html(cursor.row);
     $('.editor-counter .column-index').html(cursor.column);
+    */
   };
 };
